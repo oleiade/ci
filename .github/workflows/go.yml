@@ -5,6 +5,7 @@ on:
 
 jobs:
   build:
+    name: Build Go Code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,5 +20,45 @@ jobs:
       - name: Build
         run: go build -v ./...
 
+  test:
+    name: Test Go Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+
       - name: Test
-        run: go test
+        run: go test -race ./...
+
+  verify:
+    name: Verify Go Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+
+      - name: Vet
+        run: go vet ./...
+
+  format:
+    name: Check Go Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+
+      - name: Check gofmt
+        run: |
+          if [ -n "$(gofmt -l .)" ]; then
+            echo "Go files are not formatted. Run 'gofmt -w .' to fix them."
+            exit 1
+          fi
