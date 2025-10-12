@@ -1,4 +1,4 @@
-name: Echo
+name: Go
 
 on:
   workflow_call:
@@ -7,6 +7,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Echo a message
-        run: echo Hello World!
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+
+      - name: Install dependencies
+        run: go get .
+
+      - name: Build
+        run: go build -v ./...
+
+      - name: Test
+        run: go test
