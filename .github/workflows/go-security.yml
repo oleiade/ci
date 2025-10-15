@@ -1,6 +1,7 @@
 name: Go Security
 
 on:
+  workflow_call:
   push:
     branches:
       - master
