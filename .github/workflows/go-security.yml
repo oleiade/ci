@@ -20,3 +20,6 @@ jobs:
         uses: securego/gosec@master
         with:
           args: ./...
+
+      - name: Run Go Vulnerability Scanner
+        uses: golang/govulncheck-action@v1
