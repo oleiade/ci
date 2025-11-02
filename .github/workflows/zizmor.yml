@@ -3,8 +3,6 @@ name: Security
 on:
   workflow_call:
 
-permissions: {}
-      
 jobs:
   zizmor:
     name: zizmor latest via PyPI
