@@ -2,6 +2,7 @@ name: Security
 
 on:
   workflow_call:
+    # Can be called by other workflows to run the formatting and linting steps
 
 jobs:
   zizmor:
