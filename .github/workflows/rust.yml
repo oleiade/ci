@@ -1,6 +1,8 @@
 name: Rust
 
 on:
+  workflow_call:
+    # Can be called by other workflows to run the formatting and linting steps
   push:
     branches: ["main"]
   pull_request:
