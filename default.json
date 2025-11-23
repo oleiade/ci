@@ -1,0 +1,36 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "description": "My central Renovate config",
+    "extends": [
+        "config:recommended",
+        ":semanticCommits"
+    ],
+    "dependencyDashboard": true,
+    "timezone": "UTC",
+    "packageRules": [
+        {
+            "description": "Auto-merge minor, patch, pin, and digest updates",
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": false,
+            "ignoreTests": false
+        },
+        {
+            "description": "Group all minor and patch updates",
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "all non-major dependencies",
+            "groupSlug": "all-minor-patch"
+        }
+    ],
+    "prHourlyLimit": 0,
+    "concurrentPRsLimit": 0
+}
