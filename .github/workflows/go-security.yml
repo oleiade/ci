@@ -2,13 +2,32 @@ name: Go Security
 
 on:
   workflow_call:
+    inputs:
+      go-version:
+        description: "Go version to use (e.g., '1.23', 'stable', 'oldstable')"
+        required: false
+        type: string
+        default: "stable"
+      submodules:
+        description: "Checkout submodules: 'true', 'false', or 'recursive'"
+        required: false
+        type: string
+        default: "false"
 
 jobs:
-  tests:
+  security:
+    name: Security Scan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
         uses: actions/checkout@v6
+        with:
+          submodules: ${{ inputs.submodules }}
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ inputs.go-version }}
 
       - name: Run Gosec Security Scanner
         uses: securego/gosec@master

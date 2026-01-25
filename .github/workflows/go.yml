@@ -2,7 +2,17 @@ name: Go
 
 on:
   workflow_call:
-    # Can be called by other workflows to run the formatting and linting steps
+    inputs:
+      go-version:
+        description: "Go version to use (e.g., '1.23', 'stable', 'oldstable')"
+        required: false
+        type: string
+        default: "stable"
+      submodules:
+        description: "Checkout submodules: 'true', 'false', or 'recursive'"
+        required: false
+        type: string
+        default: "false"
 
 jobs:
   build:
@@ -11,9 +21,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          submodules: ${{ inputs.submodules }}
 
       - name: Setup Go
         uses: actions/setup-go@v6
+        with:
+          go-version: ${{ inputs.go-version }}
 
       - name: Install dependencies
         run: go get .
@@ -27,9 +41,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          submodules: ${{ inputs.submodules }}
 
       - name: Setup Go
         uses: actions/setup-go@v6
+        with:
+          go-version: ${{ inputs.go-version }}
 
       - name: Test
         run: go test -race ./...
@@ -40,9 +58,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          submodules: ${{ inputs.submodules }}
 
       - name: Setup Go
         uses: actions/setup-go@v6
+        with:
+          go-version: ${{ inputs.go-version }}
 
       - name: Vet
         run: go vet ./...
@@ -53,9 +75,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          submodules: ${{ inputs.submodules }}
 
       - name: Setup Go
         uses: actions/setup-go@v6
+        with:
+          go-version: ${{ inputs.go-version }}
 
       - name: Check gofmt
         run: |
