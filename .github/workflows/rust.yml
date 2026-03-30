@@ -23,7 +23,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup the Rust toolchain
-        uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c
+        uses: actions-rust-lang/setup-rust-toolchain@d197c158264056996cfba74a9c2d93886346edc3
         with:
           toolchain: stable
           components: rustfmt, clippy
@@ -44,7 +44,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup the Rust toolchain
-        uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c
+        uses: actions-rust-lang/setup-rust-toolchain@d197c158264056996cfba74a9c2d93886346edc3
         with:
           toolchain: stable
 
